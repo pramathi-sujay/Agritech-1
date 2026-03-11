@@ -8,15 +8,13 @@ import json
 from pydantic import BaseModel
 from aiokafka import AIOKafkaProducer
 
-
-
 KAFKA_BOOTSTRAP_SERVERS = "localhost:9094"
 TOPIC_NAME = "farmer.events"
 
 
 class Event(BaseModel):
     event_type: str
-    payload: str
+    payload: dict
 
 
   

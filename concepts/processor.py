@@ -47,7 +47,7 @@ class KafkaEventConsumer:
             sensor_id = Column(String(100), nullable=False)
             temperature = Column(Float, nullable=False)
 
-        engine = create_engine("postgresql://agriadmin:agriadmin123@db_service:5432/agri_db")
+        engine = create_engine("postgresql://agriadmin:agriadmin123@localhost:5632/agri_db")
         SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
         Base.metadata.create_all(bind=engine)
         session = SessionLocal()

@@ -15,7 +15,7 @@ CONSUMER_GROUP = "disease_detect_group"
 
 class Event(BaseModel):
     event_type: str
-    payload: str
+    payload: dict
 
 
 class KafkaEventConsumer:
@@ -40,7 +40,14 @@ class KafkaEventConsumer:
     async def consume(self):
         async for msg in self.consumer:
             event = Event(**msg.value)
-            print(f"   {event.event_type} → {event.payload}")
+            payload = event.payload
+            print("\n🌿 NEW DISEASE EVENT RECEIVED")
+            print(f"Prediction ID : {payload['prediction_id']}")
+            print(f"Disease Found : {payload['disease_detected']}")
+            print(f"Disease Type  : {payload['disease_type']}")
+            print(f"Severity      : {payload['disease_level']}")
+            print(f"Image Path    : {payload['image_path']}")
+            print("------------------------------------------------")
 
 # consume events
 async def run_consumer_demo():
